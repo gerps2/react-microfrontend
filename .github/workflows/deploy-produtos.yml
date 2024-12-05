@@ -47,6 +47,6 @@ jobs:
         run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/produtos/latest
 
       - name: Create invalidation for index.html
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --path "/produtos/latest/index.html"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --path "/produtos/latest/remoteEntry.js"
 
  
