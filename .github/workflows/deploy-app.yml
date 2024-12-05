@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'packages/app/**'
+      - 'app/**'
 
 defaults:
   run:
-    working-directory: packages/app
+    working-directory: app
 
 jobs:
   deploy:

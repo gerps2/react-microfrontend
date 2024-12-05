@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'packages/carrinho/**'
+      - 'carrinho/**'
 
 defaults:
   run:
-    working-directory: packages/carrinho
+    working-directory: carrinho
 
 jobs:
   deploy:

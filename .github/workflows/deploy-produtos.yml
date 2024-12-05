@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'packages/produtos/**'
+      - 'produtos/**'
 
 defaults:
   run:
-    working-directory: packages/produtos
+    working-directory: produtos
 
 jobs:
   deploy:
