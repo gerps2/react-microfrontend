@@ -16,7 +16,7 @@ const devConfig = {
     new ModuleFederationPlugin({
       name: 'app',
       remotes: {
-        carrinho: `carrinho@${domain}/carinho/lastest/remoteEntry.js`,
+        carrinho: `carrinho@${domain}/carrinho/lastest/remoteEntry.js`,
         produtos: `produtos@${domain}/produtos/lastest/remoteEntry.js`,
       },
       shared,
