@@ -20,7 +20,7 @@ function App() {
             top: 0,
             left: 0,
             right: 0,
-            zIndex: 1201, // Elevado para sobrepor o drawer
+            zIndex: 1201,
             backgroundColor: 'primary.main',
           }}
         >
@@ -28,11 +28,7 @@ function App() {
         </Box>
 
         <Container maxWidth="lg" sx={{ flex: 1, mt: 2, mb: 2 }}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<ProdutosLazy />} />
-            </Routes>
-          </Suspense>
+          <ProdutosLazy />
         </Container>
 
         <Box>

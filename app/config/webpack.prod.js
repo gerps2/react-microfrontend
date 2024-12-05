@@ -5,7 +5,6 @@ const shared = require('../package.json').dependencies;
 
 const domain = process.env.PRODUCTION_DOMAIN
 
-
 const devConfig = {
   mode: 'production',
   output: {
