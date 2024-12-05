@@ -4,9 +4,11 @@ const commonConfig = require('./webpack.common');
 const shared = require('../package.json').dependencies;
 
 const devConfig = {
-  mode: 'development',
-  output: { publicPath: 'http://localhost:8081/' },
-  devServer: { port: 8081, historyApiFallback: { index: 'index.html' } },
+  mode: 'production',
+  output: {
+    filename: '[name].[contenthash].js',
+    publicPath: '/carrinho/latest/'
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'carrinho',

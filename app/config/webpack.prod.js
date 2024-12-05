@@ -3,16 +3,21 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const shared = require('../package.json').dependencies;
 
+const domain = process.env.PRODUCTION_DOMAIN
+
+
 const devConfig = {
-  mode: 'development',
-  output: { publicPath: 'http://localhost:8083/' },
-  devServer: { port: 8083, historyApiFallback: { index: 'index.html' } },
+  mode: 'production',
+  output: {
+    filename: '[name].[contenthash].js',
+    publicPath: '/app/latest/'
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'app',
       remotes: {
-        carrinho: 'carrinho@http://localhost:8081/remoteEntry.js',
-        produtos: 'produtos@http://localhost:8082/remoteEntry.js',
+        carrinho: `carrinho@${domain}/carinho/lastest/remoteEntry.js`,
+        produtos: `produtos@${domain}/produtos/lastest/remoteEntry.js`,
       },
       shared,
     }),
