@@ -15,10 +15,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        app: [app, carrinho, produtos]
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
