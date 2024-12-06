@@ -22,22 +22,19 @@ function App() {
   const [items, setItems] = useState<Produto[]>([]);
 
   useEffect(() => {
-    // Handler para capturar o evento personalizado
     const handleAddToCart = (event: CustomEvent) => {
       console.log('Evento recebido no carrinho:', event);
       try {
         const produto: Produto = JSON.parse(event.detail);
         console.log('Produto adicionado ao carrinho:', produto);
-        setItems((prevItems) => [...prevItems, produto]); // Atualiza o estado corretamente
+        setItems((prevItems) => [...prevItems, produto]);
       } catch (error) {
         console.error('Erro ao processar o produto do evento:', error);
       }
     };
 
-    // Adiciona o listener para o evento
     window.addEventListener('addToCart', handleAddToCart as EventListener);
 
-    // Remove o listener ao desmontar o componente
     return () => {
       window.removeEventListener('addToCart', handleAddToCart as EventListener);
     };
@@ -50,7 +47,7 @@ function App() {
 
   const handleFinalizePurchase = () => {
     alert('Compra finalizada com sucesso!');
-    setItems([]); // Esvazia o carrinho
+    setItems([]);
   };
 
   return (

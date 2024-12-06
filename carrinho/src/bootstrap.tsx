@@ -12,7 +12,6 @@ interface MountOptions {
   initialPath?: string;
 }
 
-// Mount function to start up app
 const mount = (el: Element, { onNavigate, defaultHistory, initialPath }: MountOptions = {}) => {
   const history = defaultHistory || createMemoryHistory({ initialEntries: [initialPath || '/'] });
 

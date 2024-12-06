@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import { Drawer, Box, Container, CssBaseline } from '@mui/material';
-import './reset.css'; // Importando o reset CSS
+import './reset.css';
 
 const [CarrinhoLazy, ProdutosLazy] = [
   'Carrinho',
