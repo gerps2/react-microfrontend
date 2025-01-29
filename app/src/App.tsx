@@ -4,6 +4,7 @@ import Header from './components/Header';
 import { Drawer, Box, Container, CssBaseline } from '@mui/material';
 import './reset.css';
 
+
 const [CarrinhoLazy, ProdutosLazy] = [
   'Carrinho',
   'Produtos',

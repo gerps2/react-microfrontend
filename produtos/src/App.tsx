@@ -1,6 +1,4 @@
-import React from 'react';
 import {
-  Grid,
   Card,
   CardContent,
   CardActions,
@@ -9,16 +7,32 @@ import {
   CardMedia,
 } from '@mui/material';
 
+
 const produtos = [
-  { nome: 'Produto 1', descricao: 'Descrição do Produto 1', preco: 'R$ 50,00' },
-  { nome: 'Produto 2', descricao: 'Descrição do Produto 2', preco: 'R$ 75,00' },
-  { nome: 'Produto 3', descricao: 'Descrição do Produto 3', preco: 'R$ 100,00' },
+  {
+    nome: 'Coca-Cola',
+    descricao: 'Refrigerante popular no Brasil.',
+    preco: 'R$ 7,00',
+    imagem: 'https://bretas.vtexassets.com/arquivos/ids/205215/6573285e593b93f6a6e1151d.jpg?v=638376425945070000',
+  },
+  {
+    nome: 'Detergente Ypê',
+    descricao: 'Detergente líquido para limpeza de louças.',
+    preco: 'R$ 3,50',
+    imagem: 'https://tb0932.vtexassets.com/arquivos/ids/162850/101810.png?v=637705338309930000',
+  },
+  {
+    nome: 'Leite Italac',
+    descricao: 'Leite integral da marca Italac.',
+    preco: 'R$ 4,00',
+    imagem: 'https://www.italac.com.br/wp-content/uploads/2015/07/UHT_INTEGRAL_BASE_1L-1024x1024.png',
+  },
 ];
 
 function App() {
-  const handleAddToCart = (produto: string) => {
-    console.log('Produto adicionado ao carrinho:',produtos.find(x => x.nome == produto));
-    const event = new CustomEvent('addToCart', { detail: JSON.stringify(produtos.find(x => x.nome == produto)) });
+  const handleAddToCart = (produto) => {
+    console.log('Produto adicionado ao carrinho:', produto);
+    const event = new CustomEvent('addToCart', { detail: JSON.stringify(produto) });
     window.dispatchEvent(event);
   };
 
@@ -30,7 +44,7 @@ function App() {
             <CardMedia
               component="img"
               height="140"
-              image={`https://via.placeholder.com/150?text=${produto.nome}`}
+              image={produto.imagem}
               alt={produto.nome}
             />
             <CardContent>
@@ -47,7 +61,7 @@ function App() {
                 size="small"
                 variant="contained"
                 color="primary"
-                onClick={() => handleAddToCart(produto.nome)}
+                onClick={() => handleAddToCart(produto)}
               >
                 Adicionar ao Carrinho
               </Button>
