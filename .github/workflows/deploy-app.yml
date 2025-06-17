@@ -48,7 +48,7 @@ jobs:
           aws-region: sa-east-1
 
       - name: Copy files to production website with AWS CLI
-        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/app/latest --acl public-read
+        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/app/latest --delete
 
       - name: Create invalidation for index.html and main JS
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/app/latest/index.html" "/app/latest/main*.js"

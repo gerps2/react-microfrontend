@@ -27,6 +27,15 @@ resource "aws_s3_bucket" "microfrontend_bucket" {
   }
 }
 
+# Desabilita uso de ACLs (modo recomendado pela AWS)
+resource "aws_s3_bucket_ownership_controls" "ownership" {
+  bucket = aws_s3_bucket.microfrontend_bucket.id
+
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
 # Website estático
 resource "aws_s3_bucket_website_configuration" "microfrontend_website" {
   bucket = aws_s3_bucket.microfrontend_bucket.id
@@ -79,13 +88,16 @@ resource "aws_s3_bucket_policy" "microfrontend_bucket_policy" {
     ]
   })
 
-  depends_on = [aws_s3_bucket_public_access_block.microfrontend_bucket_public_access_block]
+  depends_on = [
+    aws_s3_bucket_public_access_block.microfrontend_bucket_public_access_block,
+    aws_s3_bucket_ownership_controls.ownership
+  ]
 }
 
 # CloudFront
 resource "aws_cloudfront_distribution" "app_distribution" {
   origin {
-    domain_name = aws_s3_bucket.microfrontend_bucket.website_endpoint
+    domain_name = aws_s3_bucket_website_configuration.microfrontend_website.website_endpoint
     origin_id   = "appS3Origin"
 
     custom_origin_config {
@@ -187,5 +199,5 @@ output "s3_bucket_name" {
 }
 
 output "s3_website_endpoint" {
-  value = aws_s3_bucket.microfrontend_bucket.website_endpoint
+  value = aws_s3_bucket_website_configuration.microfrontend_website.website_endpoint
 }
