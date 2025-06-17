@@ -28,13 +28,13 @@ const produtos: Produto[] = [
     nome: 'Detergente Ypê',
     descricao: 'Detergente líquido para limpeza de louças.',
     preco: 'R$ 3,50',
-    imagem: 'https://tb0932.vtexassets.com/arquivos/ids/162850/101810.png?v=637705338309930000',
+    imagem: 'https://acdn-us.mitiendanube.com/stores/001/387/654/products/ype-transparente1-88a1b51e52e32c88a816347339910442-640-0.jpg',
   },
   {
     nome: 'Leite Italac',
     descricao: 'Leite integral da marca Italac.',
     preco: 'R$ 4,00',
-    imagem: 'https://www.italac.com.br/wp-content/uploads/2015/07/UHT_INTEGRAL_BASE_1L-1024x1024.png',
+    imagem: 'https://tb1304.vtexassets.com/arquivos/ids/194321/Leite-longa-vida-italac-integral-c-tampa-1L.jpg?v=638089746079530000',
   },
 ];
 
