@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install": "npm install --prefix app && npm install --prefix carrinho && npm install --prefix produtos",
     "start": "npm run start:all",
-    "start:all": "concurrently --kill-others-on-fail --names \"CARRINHO,PRODUTOS,APP\" \"npm run start:carinho\" \"npm run start:produtos\" \"npm run start:app\" \"npm run open\"",
+    "start:all": "concurrently --kill-others-on-fail --names \"CARRINHO,PRODUTOS,APP\" \"npm run start:carrinho\" \"npm run start:produtos\" \"npm run start:app\" \"npm run open\"",
     "start:app": "npm start --prefix app",
-    "start:carinho": "npm start --prefix carrinho",
+    "start:carrinho": "npm start --prefix carrinho",
     "start:produtos": "npm start --prefix produtos",
     "open": "npx open-cli http://localhost:8083"
   },

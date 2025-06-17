@@ -1,14 +1,23 @@
+import React from 'react';
+
 import {
   Card,
   CardContent,
   CardActions,
   Typography,
   Button,
+  Grid,
   CardMedia,
 } from '@mui/material';
 
+interface Produto {
+  nome: string;
+  descricao: string;
+  preco: string;
+  imagem: string;
+}
 
-const produtos = [
+const produtos: Produto[] = [
   {
     nome: 'Coca-Cola',
     descricao: 'Refrigerante popular no Brasil.',
@@ -30,7 +39,7 @@ const produtos = [
 ];
 
 function App() {
-  const handleAddToCart = (produto) => {
+  const handleAddToCart = (produto: Produto) => {
     console.log('Produto adicionado ao carrinho:', produto);
     const event = new CustomEvent('addToCart', { detail: JSON.stringify(produto) });
     window.dispatchEvent(event);
