@@ -23,11 +23,21 @@ help:
 
 setup:
 	@echo "Configurando ambiente de desenvolvimento..."
-	@echo "Usando NVM para configurar Node.js v$(NODE_VERSION)"
-	@powershell -Command "if (Get-Command nvm -ErrorAction SilentlyContinue) { exit 0 } else { Write-Host 'NVM nao encontrado. Por favor, instale o NVM antes de continuar.' -ForegroundColor Red; exit 1 }"
-	@nvm install $(NODE_VERSION)
-	@nvm use $(NODE_VERSION)
-	@echo "Node.js v$(NODE_VERSION) configurado com sucesso!"
+	@echo "Verificando Node.js..."
+	@if command -v node > /dev/null; then \
+		node_version=$$(node -v | cut -d 'v' -f2); \
+		echo "Node.js $$node_version encontrado"; \
+		if [ "$$node_version" != "$(NODE_VERSION)" ]; then \
+			echo "AVISO: A versao atual do Node.js ($$node_version) e diferente da recomendada ($(NODE_VERSION))."; \
+			echo "Para instalar a versao recomendada, execute manualmente:"; \
+			echo "  source $(brew --prefix)/opt/nvm/nvm.sh && nvm install $(NODE_VERSION) && nvm use $(NODE_VERSION)"; \
+		fi; \
+	else \
+		echo "Node.js nao encontrado. Por favor, instale o Node.js v$(NODE_VERSION)."; \
+		echo "Se voce tem o NVM instalado, execute manualmente:"; \
+		echo "  source $(brew --prefix)/opt/nvm/nvm.sh && nvm install $(NODE_VERSION) && nvm use $(NODE_VERSION)"; \
+		exit 1; \
+	fi
 	@echo "Verificando versao do NPM..."
 	@npm --version
 	@echo "Ambiente configurado com sucesso!"
