@@ -36,6 +36,12 @@ const produtos: Produto[] = [
     preco: 'R$ 4,00',
     imagem: 'https://tb1304.vtexassets.com/arquivos/ids/194321/Leite-longa-vida-italac-integral-c-tampa-1L.jpg?v=638089746079530000',
   },
+  {
+    nome: 'Leite Italac',
+    descricao: 'Leite integral da marca Italac.',
+    preco: 'R$ 4,00',
+    imagem: 'https://tb1304.vtexassets.com/arquivos/ids/194321/Leite-longa-vida-italac-integral-c-tampa-1L.jpg?v=638089746079530000',
+  },
 ];
 
 function App() {
