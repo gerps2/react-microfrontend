@@ -14,9 +14,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 interface Produto {
+  id: string;
   nome: string;
   descricao: string;
   preco: string;
+  categoria?: string;
 }
 
 function App() {
@@ -73,7 +75,7 @@ function App() {
         {items.length > 0 ? (
           items.map((item, index) => (
             <ListItem
-              key={index}
+              key={item.id || index}
               secondaryAction={
                 <IconButton
                   edge="end"
@@ -86,7 +88,18 @@ function App() {
             >
               <ListItemText
                 primary={item.nome}
-                secondary={`Preço: ${item.preco}`}
+                secondary={
+                  <Box>
+                    <Typography variant="body2">
+                      {item.preco}
+                    </Typography>
+                    {item.categoria && (
+                      <Typography variant="caption" color="textSecondary">
+                        {item.categoria}
+                      </Typography>
+                    )}
+                  </Box>
+                }
               />
             </ListItem>
           ))

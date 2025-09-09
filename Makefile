@@ -100,12 +100,14 @@ terraform-destroy:
 
 build-all:
 	@echo "=== Compilando todos os microfrontends ==="
-	@echo "Compilando app..."
-	@cd app && npm run build
-	@echo "Compilando carrinho..."
-	@cd carrinho && npm run build
-	@echo "Compilando produtos..."
-	@cd produtos && npm run build
+	@PRODUCTION_DOMAIN=$$(cd terraform && terraform output -raw app_distribution_domain_name) && \
+	echo "Usando domínio de produção: https://$$PRODUCTION_DOMAIN" && \
+	echo "Compilando app..." && \
+	cd app && PRODUCTION_DOMAIN=https://$$PRODUCTION_DOMAIN npm run build && \
+	echo "Compilando carrinho..." && \
+	cd ../carrinho && PRODUCTION_DOMAIN=https://$$PRODUCTION_DOMAIN npm run build && \
+	echo "Compilando produtos..." && \
+	cd ../produtos && PRODUCTION_DOMAIN=https://$$PRODUCTION_DOMAIN npm run build
 	@echo "Todos os microfrontends compilados com sucesso!"
 
 get-bucket-name:
@@ -117,9 +119,11 @@ deploy-local: build-all
 	echo "Fazendo upload dos arquivos para o bucket $$BUCKET_NAME" && \
 	aws s3 sync app/dist/ s3://$$BUCKET_NAME/app/latest/ --delete && \
 	aws s3 sync carrinho/dist/ s3://$$BUCKET_NAME/carrinho/latest/ --delete && \
-	aws s3 sync produtos/dist/ s3://$$BUCKET_NAME/produtos/latest/ --delete
+	aws s3 sync produtos/dist/ s3://$$BUCKET_NAME/produtos/latest/ --delete && \
+	echo "Copiando index.html principal para a raiz..." && \
+	aws s3 cp s3://$$BUCKET_NAME/app/latest/index.html s3://$$BUCKET_NAME/index.html
 	@echo "Invalidando cache do CloudFront..."
 	@DIST_ID=$$(cd terraform && terraform output -raw app_distribution_id) && \
 	aws cloudfront create-invalidation --distribution-id $$DIST_ID --paths "/*"
 	@echo "Deploy concluído com sucesso!"
-	@echo "URL da aplicação: $$(cd terraform && terraform output -raw app_distribution_domain_name)"
+	@echo "URL da aplicação: https://$$(cd terraform && terraform output -raw app_distribution_domain_name)"
