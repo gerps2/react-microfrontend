@@ -90,7 +90,7 @@ const gerarProdutosIniciais = (): Produto[] => [
   },
   {
     id: '2',
-    nome: 'Detergente Neutro 500ml',
+    nome: 'Detergente Neutro 400ml',
     descricao: 'Detergente líquido para limpeza de louças e utensílios.',
     preco: 'R$ 3,80',
     imagem: gerarImagemAleatoria('Limpeza'),
